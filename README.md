@@ -1,2 +1,38 @@
-# Continuous-Control-using-DDPG
-Continuous Control using DDPG
+<img src="https://camo.githubusercontent.com/7ad5cdff66f7229c4e9822882b3c8e57960dca4e/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f766964656f2e756461636974792d646174612e636f6d2f746f706865722f323031382f4a756e652f35623165613737385f726561636865722f726561636865722e676966">   
+
+### Deep Reinforcement Learning Reacher Continuous Control   
+
+### Observations:
+- To run the project just execute the .ipnb cells in the ascending order.
+- If you are not using a windows environment, you will need to download the corresponding <b>"Reacher"</b> version for you OS system. Mail me if you need more details about the environment <b>.exe</b> file.
+- The <b>checkpoint.pth</b> has the expected average score already hit.
+
+### Requeriments:
+- tensorflow: 1.7.1
+- Pillow: 4.2.1
+- matplotlib
+- numpy: 1.11.0
+- pytest: 3.2.2
+- docopt
+- pyyaml
+- protobuf: 3.5.2
+- grpcio: 1.11.0
+- torch: 0.4.1
+- pandas
+- scipy
+- ipykernel
+- jupyter: 5.6.0
+
+
+## The problem:
+- The task solved here refers to a continuous control problem where the agent must be able to reach and go along with a moving ball controlling its arms.
+- It's a continuous problem because the action has a continuous value and the agent must be able to provide this value instead of just chose the one with the biggest value (like in discrete tasks where it should just say which action it wants to execute).
+- The reward of +0.1 is provided for each step that the agent's hand is in the goal location, in this case, the moving ball.
+- The environment provides 2 versions, one with just 1 agent and another one with 20 agents working in parallel.
+- For both versions the goal is to get an average score of +30 over 100 consecutive episodes (for the second version, the average score of all agents must be +30).   
+
+## The solution: 
+- For this problem I used an implementation of the Deep Deterministic Policy Gradients algorithm. - This task brought two big challenges for me: hyperparameters tunning and noise range configuration. Standard Normal noise is essential for this project. If we use a random noise, the actions keep getting clipped as event by the Unity agent behaviour during the training. For the future, , I stil want to check this task with the A2C  D4PG algorithm and discover when and where each of the algorithms (DDPG vs. D4PG) have the best performance. I also want to check if using Advantage Critic benefits this task. I think the reward calculation using GAE may also benefit.
+### The hyperparameters: 
+
+- The file with the hyperparameters configuration is mentioned in the  <b>.ipnb</b>.  - If you want you can change the model configuration , change the Actor and Critic Class in the  <b>.ipnb</b> file. - The actual configuration of the hyperparameters is:    - Learning Rate: 1e-4 (in both DNN)   - Batch Size: 128   - Replay Buffer: 1e5   - Gamma: 0.99   - Tau: 1e-3   - Ornstein-Uhlenbeck noise parameters (0.15 theta and 0.2 sigma.)  - For the neural models:       - Actor         - Hidden: (input, 256)  - ReLU     - Hidden: (256, 128)    - ReLU     - Output: (128, 4)      - TanH. The action output is clipped between -1 and 1.   - Critic     - Hidden: (input, 256)              - ReLU     - Hidden: (256 + action_size, 128)  - ReLU     - Output: (128, 1)                  - Linear
