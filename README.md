@@ -8,7 +8,6 @@ A reward of +0.1 is provided for each timestep that the agent's hand is in the g
 
 In order to solve the environment, our agent must achieve a score of +30 averaged across all 20 agents for 100 consecutive episodes.
 
-
 ### Getting Started
 
 1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
@@ -43,6 +42,9 @@ In order to solve the environment, our agent must achieve a score of +30 average
 - jupyter: 5.6.0
 
 I have also created a requirement.txt. You may do a pip install requirement.txt to install all the required packages.
+
+### Execution 
+To run my code, I have copied my entire code to main.py. So you need to execute the command python main.py
 
 ## Summary of Environment
 - Set-up: Double-jointed arm which can move to target locations.
@@ -89,11 +91,12 @@ This noise is ignored during testing.
 
 ### Score vs Episode while training 1 agent
 <img src="https://github.com/kaustav1987/Continuous-Control-using-DDPG/blob/master/Single%20Agent%20Score%20Plot.png"> 
+It took me 263 episodes to get the desired score for Version1 (1 agent)
 
 ### Score vs Episode while training 20 agents
 <img src="https://github.com/kaustav1987/Continuous-Control-using-DDPG/blob/master/20%20Agent%20Score%20Plot.png"> 
+It took me 102 episodes to get the desired score for Version2 (20 agents)
 
-I stil want to check this task with the A2C , D4PG algorithm and discover when and where each of the algorithms (DDPG vs. D4PG) have the best performance. I also want to check if using Advantage Critic benefits this task. I think the reward calculation using GAE may also benefit.
-
+I stil want to check this task with the A2C , D4PG algorithm and discover when and where each of the algorithms (DDPG vs. D4PG) have the best performance. I also want to check if using Advantage Critic benefits this task. I want to explore I want to try with experienced replay. We may learn more from rare but important events in that case.I think we may also try N-Step boostrapping instead 1 step for bias-variance tradeoff. I think the reward calculation using GAE may also benefit.
 
 
